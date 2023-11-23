@@ -29,7 +29,7 @@ export default function App() {
   return (
     <>
       <Signature ref={$svg} />
-      <button onClick={() => handle()}>Clear</button>
+      <button onClick={handle}>Clear</button>
     </>
   );
 }
