@@ -80,10 +80,10 @@ jobs:
             
             ${{ steps.changelog.outputs.changelog }}
 
-      # - run: npm publish --access public --provenance
-      #   name: 📦 @uiw/react-signature to NPM
-      #   working-directory: core
-      #   continue-on-error: true
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public --provenance
+        name: 📦 @uiw/react-signature to NPM
+        working-directory: core
+        continue-on-error: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     
