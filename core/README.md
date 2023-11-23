@@ -14,11 +14,23 @@ npm install @uiw/react-signature
 ```
 
 ```jsx mdx:preview
-import React from "react";
+import React, { useRef } from "react";
 import Signature from '@uiw/react-signature';
 
 export default function App() {
-  return <Signature />;
+  const $svg = useRef(null);
+  const handle = (evn) => {
+    const parentElement = $svg.current
+    while (parentElement.firstChild) {
+      parentElement.removeChild(parentElement.firstChild);
+    }
+  }
+  return (
+    <>
+      <Signature ref={$svg} />
+      <button onClick={() => handle()}>Clear</button>
+    </>
+  );
 }
 ```
 

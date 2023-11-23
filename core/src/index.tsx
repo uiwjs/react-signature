@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { getStroke, type StrokeOptions } from 'perfect-freehand';
 import { getSvgPathFromStroke, getBoundingClientRect, getClinetXY, defaultOptions, defaultStyle } from './utils';
 
@@ -9,11 +9,13 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
 
 let points: number[][] = [];
 
-export default function Signature(props: SignatureProps = {}) {
+const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
   const { className, prefixCls = 'w-signature', style, options, ...others } = props;
   const cls = [className, prefixCls].filter(Boolean).join(' ');
   const $svg = useRef<SVGSVGElement>(null);
   const $path = useRef<SVGPathElement>();
+
+  useImperativeHandle<SVGSVGElement | null, SVGSVGElement | null>(ref, () => $svg.current, [$svg.current]);
 
   const handlePointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
     const { offsetY, offsetX } = getBoundingClientRect($svg.current);
@@ -23,6 +25,7 @@ export default function Signature(props: SignatureProps = {}) {
     const pathElm = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     $path.current = pathElm;
     $svg.current!.appendChild(pathElm);
+    // $svg.current?.remove()
   };
 
   const handlePointerMove = (e: PointerEvent) => {
@@ -59,4 +62,6 @@ export default function Signature(props: SignatureProps = {}) {
       style={{ ...defaultStyle, ...style }}
     />
   );
-}
+});
+
+export default Signature;
