@@ -37,7 +37,7 @@ jobs:
         with:
           output: website/build/badges.svg
 
-      - run: cp -rp coverage website/build
+      - run: cp -rp coverage/lcov-report website/build
       - run: cp -rp core/dist/*js website/build
 
       - name: Is a tag created auto?

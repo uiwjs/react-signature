@@ -2,11 +2,16 @@ react-signature
 ===
 
 [![Build & Deploy](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml/badge.svg)](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml)
-[![Coverage Status](https://uiwjs.github.io/react-signature/badges.svg)](https://uiwjs.github.io/react-signature/coverage/lcov-report/)
+[![Coverage Status](https://uiwjs.github.io/react-signature/badges.svg)](https://uiwjs.github.io/react-signature/lcov-report/)
 
 A signature board component for react.
 
-## Using
+
+## Quick Start
+
+```bash
+npm install @uiw/react-signature
+```
 
 ```jsx mdx:preview
 import React from "react";
@@ -16,6 +21,74 @@ export default function App() {
   return <Signature />;
 }
 ```
+
+## Props
+
+```ts
+import React from 'react';
+import { type StrokeOptions } from 'perfect-freehand';
+export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
+  prefixCls?: string;
+  options?: StrokeOptions;
+}
+export default function Signature(props?: SignatureProps): React.JSX.Element;
+```
+
+### Options
+
+The options object is optional, as are each of its properties.
+
+| Property           | Type     | Default | Description                                           |
+| ------------------ | -------- | ------- | ----------------------------------------------------- |
+| `size`             | number   | 8       | The base size (diameter) of the stroke.               |
+| `thinning`         | number   | .5      | The effect of pressure on the stroke's size.          |
+| `smoothing`        | number   | .5      | How much to soften the stroke's edges.                |
+| `streamline`       | number   | .5      | How much to streamline the stroke.                    |
+| `simulatePressure` | boolean  | true    | Whether to simulate pressure based on velocity.       |
+| `easing`           | function | t => t  | An easing function to apply to each point's pressure. |
+| `start`            | { }      |         | Tapering options for the start of the line.           |
+| `end`              | { }      |         | Tapering options for the end of the line.             |
+| `last`             | boolean  | false    | Whether the stroke is complete.                       |
+
+**Note:** When the `last` property is `true`, the line's end will be drawn at the last input point, rather than slightly behind it.
+
+The `start` and `end` options accept an object:
+
+| Property | Type              | Default | Description                                                                              |
+| -------- | ----------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `cap`    | boolean           | true    | Whether to draw a cap.                                                                   |
+| `taper`  | number or boolean | 0       | The distance to taper. If set to true, the taper will be the total length of the stroke. |
+| `easing` | function          | t => t  | An easing function for the tapering effect.                                              |
+
+**Note:** The `cap` property has no effect when `taper` is more than zero.
+
+```js
+<Signature
+  options={{
+    size: 6,
+    smoothing: 0.46,
+    thinning: 0.73,
+    streamline: 0.5,
+    easing: (t) => t,
+    simulatePressure: true,
+    last: true,
+    start: {
+      cap: true,
+      taper: 0,
+      easing: (t) => t,
+    },
+    end: {
+      cap: true,
+      taper: 0,
+      easing: (t) => t,
+    },
+  }}
+/>
+```
+
+> **Tip:** To create a stroke with a steady line, set the `thinning` option to `0`.
+
+> **Tip:** To create a stroke that gets thinner with pressure instead of thicker, use a negative number for the `thinning` option.
 
 ## Development
 
