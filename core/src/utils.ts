@@ -43,8 +43,8 @@ export const getBoundingClientRect = (el: SVGSVGElement | null) => {
   return { offsetX, offsetY };
 };
 
-export const getClinetXY = (e: MouseEvent | TouchEvent) => {
-  const { clientX, clientY } = e.type === 'touchmove' ? (e as TouchEvent).touches[0] : (e as MouseEvent);
+export const getClinetXY = ({ clientX, clientY }: PointerEvent) => {
+  // const { clientX, clientY } = e.type === 'touchmove' ? (e as TouchEvent).touches[0] : (e as MouseEvent);
   return { clientX, clientY };
 };
 

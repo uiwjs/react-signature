@@ -8,13 +8,14 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
 }
 
 let points: number[][] = [];
+
 export default function Signature(props: SignatureProps = {}) {
   const { className, prefixCls = 'w-signature', style, options, ...others } = props;
   const cls = [className, prefixCls].filter(Boolean).join(' ');
   const $svg = useRef<SVGSVGElement>(null);
   const $path = useRef<SVGPathElement>();
 
-  const handleMouseDown = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const handlePointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
     const { offsetY, offsetX } = getBoundingClientRect($svg.current);
     const clientX = e.clientX || e.nativeEvent.clientX;
     const clientY = e.clientY || e.nativeEvent.clientY;
@@ -24,7 +25,7 @@ export default function Signature(props: SignatureProps = {}) {
     $svg.current!.appendChild(pathElm);
   };
 
-  const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+  const handlePointerMove = (e: PointerEvent) => {
     if ($path.current) {
       const { offsetY, offsetX } = getBoundingClientRect($svg.current);
       const { clientX, clientY } = getClinetXY(e);
@@ -35,21 +36,17 @@ export default function Signature(props: SignatureProps = {}) {
     }
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = () => {
     points = [];
     $path.current = undefined;
   };
 
   useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchmove', handleMouseMove);
-    document.addEventListener('touchend', handleMouseUp);
+    document.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerup', handlePointerUp);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleMouseMove);
-      document.removeEventListener('touchend', handleMouseUp);
+      document.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
 
@@ -58,8 +55,7 @@ export default function Signature(props: SignatureProps = {}) {
       {...others}
       ref={$svg}
       className={cls}
-      onPointerDown={handleMouseDown}
-      // onPointerMove={handlePointerMove}
+      onPointerDown={handlePointerDown}
       style={{ ...defaultStyle, ...style }}
     />
   );
