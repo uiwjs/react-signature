@@ -4,7 +4,7 @@ import lessModules from '@kkt/less-modules';
 export default (conf: WebpackConfiguration, env: 'development' | 'production', options: LoaderConfOptions) => {
   conf = lessModules(conf, env, options);
   if (options.bundle) {
-    conf.output!.library = '@uiw/react-layout';
+    conf.output!.library = '@uiw/react-signature';
     conf.externals = {
       react: {
         root: 'React',

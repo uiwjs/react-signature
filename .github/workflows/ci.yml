@@ -4,29 +4,7 @@ on:
     branches:
       - main
 
-# env:
-#   SKIP_PREFLIGHT_CHECK: true
 jobs:
-  windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Look Changelog
-        uses: jaywcjlove/changelog-generator@main
-        with:
-          filter-author: (小弟调调™|Renovate Bot|renovate-bot)
-          filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
-
-      - run: npm install --unsafe-perm
-      # - run: npm run hoist
-      - run: npm run build
-      - run: npm run coverage
-      - run: npm run doc
-
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -98,13 +76,13 @@ jobs:
           name: ${{ steps.changelog.outputs.tag }}
           tag: ${{ steps.changelog.outputs.tag }}
           body: |
-            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/uiwjs/react-monorepo-template/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
+            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/uiwjs/react-signature/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
             Comparing Changes: ${{ steps.changelog.outputs.compareurl }}  
             
             ${{ steps.changelog.outputs.changelog }}
 
       # - run: npm publish --access public --provenance
-      #   name: 📦 @uiw/react-monorepo-template to NPM
+      #   name: 📦 @uiw/react-signature to NPM
       #   working-directory: core
       #   continue-on-error: true
       #   env:

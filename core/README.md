@@ -1,34 +1,20 @@
-react-monorepo-template
+react-signature
 ===
 
-[![Build & Deploy](https://github.com/uiwjs/react-monorepo-template/actions/workflows/ci.yml/badge.svg)](https://github.com/uiwjs/react-monorepo-template/actions/workflows/ci.yml)
-[![Coverage Status](https://uiwjs.github.io/react-monorepo-template/badges.svg)](https://uiwjs.github.io/react-monorepo-template/coverage/lcov-report/)
+[![Build & Deploy](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml/badge.svg)](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml)
+[![Coverage Status](https://uiwjs.github.io/react-signature/badges.svg)](https://uiwjs.github.io/react-signature/coverage/lcov-report/)
 
-Simple [React](https://github.com/facebook/react) package development project example template.
+A signature board component for react.
 
-## Directory Structure
+## Using
 
-```bash
-├── LICENSE
-├── README.md -> core/README.md
-├── core              # 📦 package @uiw/react-monorepo-template
-│   ├── README.md
-│   ├── cjs           # 🔄 Compiled cjs directory
-│   ├── esm           # 🔄 Compiled esm directory
-│   ├── src           # Package source directory
-│   ├── dist.css      # 🔄 compile less to css
-│   ├── package.json  # name => @uiw/react-monorepo-template
-│   └── tsconfig.json
-├── lerna.json
-├── package.json
-├── tsconfig.json
-├── test              # ⛑ test case
-└── website           # 🐝 Package example test, website
-    ├── README.md
-    ├── package.json
-    ├── public
-    ├── src
-    └── tsconfig.json
+```jsx mdx:preview
+import React from "react";
+import Signature from '@uiw/react-signature';
+
+export default function App() {
+  return <Signature />;
+}
 ```
 
 ## Development
@@ -42,8 +28,8 @@ npm run install
 2. To develop, run the self-reloading build:
 
 ```bash
-npm run build  # Compile packages      📦 @uiw/react-monorepo-template
-npm run watch  # Real-time compilation 📦 @uiw/react-monorepo-template
+npm run build  # Compile packages      📦 @uiw/react-signature
+npm run watch  # Real-time compilation 📦 @uiw/react-signature
 ```
 
 3. Run Document Website Environment:
@@ -58,30 +44,12 @@ npm run start
 npm run test
 ```
 
-
-### Using
-
-```jsx mdx:preview
-import React from "react";
-import MonorepoTemplate from '@uiw/react-monorepo-template';
-
-export default function App() {
-  return (
-    <div className="container">
-    <MonorepoTemplate>
-      Example test
-    </MonorepoTemplate>
-    </div>
-  );
-}
-```
-
 ## Contributors
 
 As always, thanks to our amazing contributors!
 
-<a href="https://github.com/uiwjs/react-monorepo-template/graphs/contributors">
-  <img src="https://uiwjs.github.io/react-monorepo-template/CONTRIBUTORS.svg" />
+<a href="https://github.com/uiwjs/react-signature/graphs/contributors">
+  <img src="https://uiwjs.github.io/react-signature/CONTRIBUTORS.svg" />
 </a>
 
 Made with [contributors](https://github.com/jaywcjlove/github-action-contributors).

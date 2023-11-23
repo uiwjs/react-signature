@@ -1,12 +1,12 @@
 {
-  "name": "@uiw/react-monorepo-template",
-  "version": "1.1.0",
-  "description": "Simple React package development project example template..",
+  "name": "@uiw/react-signature",
+  "version": "0.0.1",
+  "description": "A signature board component for react.",
   "author": "Kenny Wong <wowohoo@qq.com>",
-  "homepage": "https://uiwjs.github.io/react-monorepo-template",
+  "homepage": "https://uiwjs.github.io/react-signature",
   "repository": {
     "type": "git",
-    "url": "https://github.com/uiwjs/react-monorepo-template.git"
+    "url": "https://github.com/uiwjs/react-signature.git"
   },
   "license": "MIT",
   "main": "./cjs/index.js",
@@ -22,12 +22,11 @@
     "access": "public"
   },
   "keywords": [
-    "react-monorepo-template",
+    "react-signature",
     "react.js",
     "react",
-    "template",
+    "signature",
     "monorepo",
-    "monorepo-template",
     "uiw",
     "uiw-react",
     "react-component",
@@ -42,6 +41,10 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
+  },
+  "dependencies": {
+    "perfect-freehand": "^1.2.0",
+    "svg-pathdata": "^6.0.3"
   },
   "devDependencies": {
     "@babel/runtime": "^7.18.9",
