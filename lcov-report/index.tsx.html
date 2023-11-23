@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.57% </span>
+                <span class="strong">47.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/35</span>
+                <span class='fraction'>19/40</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>4/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">51.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/34</span>
+                <span class='fraction'>19/37</span>
             </div>
         
             
@@ -134,7 +134,17 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,6 +157,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -166,7 +184,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -182,6 +199,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -190,14 +208,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,21 +225,31 @@
 import { getStroke, type StrokeOptions } from 'perfect-freehand';
 import { getSvgPathFromStroke, getBoundingClientRect, getClinetXY, defaultOptions, defaultStyle } from './utils';
 &nbsp;
+export * from 'perfect-freehand';
 export * from './utils';
 &nbsp;
 export interface SignatureProps extends React.SVGProps&lt;SVGSVGElement&gt; {
   prefixCls?: string;
   options?: StrokeOptions;
+  readonly?: boolean;
   onPointer?: (points: number[][]) =&gt; void;
 }
 &nbsp;
-let points: number[][] = [];
-&nbsp;
 const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props, ref) =&gt; {
-  const { className, prefixCls = 'w-signature', style, onPointer, options, ...others } = props;
+  const {
+    className,
+    prefixCls = 'w-signature',
+    style,
+    readonly = false,
+    onPointer,
+    options,
+    children,
+    ...others
+  } = props;
   const cls = [className, prefixCls].filter(Boolean).join(' ');
   const $svg = useRef&lt;SVGSVGElement&gt;(null);
   const $path = useRef&lt;SVGPathElement&gt;();
+  const pointsRef = useRef&lt;number[][]&gt;();
 &nbsp;
   useImperativeHandle&lt;SVGSVGElement | null, SVGSVGElement | null&gt;(ref, <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >$svg.current,</span> [$svg.current]);
 &nbsp;
@@ -231,47 +257,45 @@ const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props, ref) =
     const { offsetY, offsetX } = <span class="cstat-no" title="statement not covered" >getBoundingClientRect($svg.current);</span>
     const clientX = <span class="cstat-no" title="statement not covered" >e.clientX || e.nativeEvent.clientX;</span>
     const clientY = <span class="cstat-no" title="statement not covered" >e.clientY || e.nativeEvent.clientY;</span>
-<span class="cstat-no" title="statement not covered" >    points = [[clientX - offsetX, clientY - offsetY]];</span>
+<span class="cstat-no" title="statement not covered" >    pointsRef.current = [[clientX - offsetX, clientY - offsetY]];</span>
     const pathElm = <span class="cstat-no" title="statement not covered" >document.createElementNS('http://www.w3.org/2000/svg', 'path');</span>
 <span class="cstat-no" title="statement not covered" >    $path.current = pathElm;</span>
 <span class="cstat-no" title="statement not covered" >    $svg.current!.appendChild(pathElm);</span>
-    // $svg.current?.remove()
   };
 &nbsp;
   const handlePointerMove = <span class="fstat-no" title="function not covered" >(e</span>: PointerEvent) =&gt; {
 <span class="cstat-no" title="statement not covered" >    if ($path.current) {</span>
       const { offsetY, offsetX } = <span class="cstat-no" title="statement not covered" >getBoundingClientRect($svg.current);</span>
       const { clientX, clientY } = <span class="cstat-no" title="statement not covered" >getClinetXY(e);</span>
-<span class="cstat-no" title="statement not covered" >      points = [...points, [clientX - offsetX, clientY - offsetY]];</span>
-      const stroke = <span class="cstat-no" title="statement not covered" >getStroke(points, { ...defaultOptions, ...options });</span>
+<span class="cstat-no" title="statement not covered" >      pointsRef.current = [...pointsRef.current!, [clientX - offsetX, clientY - offsetY]];</span>
+      const stroke = <span class="cstat-no" title="statement not covered" >getStroke(pointsRef.current!, { ...defaultOptions, ...options });</span>
       const pathData = <span class="cstat-no" title="statement not covered" >getSvgPathFromStroke(stroke);</span>
 <span class="cstat-no" title="statement not covered" >      $path.current?.setAttribute('d', pathData);</span>
     }
   };
 &nbsp;
   const handlePointerUp = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    onPointer &amp;&amp; onPointer(points);</span>
-<span class="cstat-no" title="statement not covered" >    points = [];</span>
+    let result = <span class="cstat-no" title="statement not covered" >pointsRef.current || [];</span>
+<span class="cstat-no" title="statement not covered" >    onPointer &amp;&amp; onPointer(result);</span>
 <span class="cstat-no" title="statement not covered" >    $path.current = undefined;</span>
+<span class="cstat-no" title="statement not covered" >    pointsRef.current = undefined;</span>
   };
 &nbsp;
   useEffect(() =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (readonly) <span class="cstat-no" title="statement not covered" >return;</span>
     document.addEventListener('pointermove', handlePointerMove);
     document.addEventListener('pointerup', handlePointerUp);
     return () =&gt; {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (readonly) <span class="cstat-no" title="statement not covered" >return;</span>
       document.removeEventListener('pointermove', handlePointerMove);
       document.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
 &nbsp;
   return (
-    &lt;svg
-      {...others}
-      ref={$svg}
-      className={cls}
-      onPointerDown={handlePointerDown}
-      style={{ ...defaultStyle, ...style }}
-    /&gt;
+    &lt;svg {...others} ref={$svg} className={cls} onPointerDown={handlePointerDown} style={{ ...defaultStyle, ...style }}&gt;
+      {children}
+    &lt;/svg&gt;
   );
 });
 &nbsp;
@@ -283,7 +307,7 @@ export default Signature;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-23T21:14:16.936Z
+                at 2023-11-23T22:16:08.609Z
             </div>
         <script src="prettify.js"></script>
         <script>
