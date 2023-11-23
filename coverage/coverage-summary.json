@@ -1,4 +1,0 @@
-{"total": {"lines":{"total":50,"covered":19,"skipped":0,"pct":38},"statements":{"total":51,"covered":19,"skipped":0,"pct":37.25},"functions":{"total":13,"covered":3,"skipped":0,"pct":23.07},"branches":{"total":14,"covered":1,"skipped":0,"pct":7.14},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
-,"/home/runner/work/react-signature/react-signature/core/src/index.tsx": {"lines":{"total":31,"covered":15,"skipped":0,"pct":48.38},"functions":{"total":6,"covered":3,"skipped":0,"pct":50},"statements":{"total":31,"covered":15,"skipped":0,"pct":48.38},"branches":{"total":8,"covered":1,"skipped":0,"pct":12.5}}
-,"/home/runner/work/react-signature/react-signature/core/src/utils.ts": {"lines":{"total":19,"covered":4,"skipped":0,"pct":21.05},"functions":{"total":7,"covered":0,"skipped":0,"pct":0},"statements":{"total":20,"covered":4,"skipped":0,"pct":20},"branches":{"total":6,"covered":0,"skipped":0,"pct":0}}
-}
