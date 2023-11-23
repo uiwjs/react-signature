@@ -42,8 +42,29 @@ import { type StrokeOptions } from 'perfect-freehand';
 export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   prefixCls?: string;
   options?: StrokeOptions;
+  onPointer?: (points: number[][]) => void;
 }
 export default function Signature(props?: SignatureProps): React.JSX.Element;
+```
+
+utils
+
+```ts
+import { type StrokeOptions } from 'perfect-freehand';
+/**
+ * Turn the points returned from perfect-freehand into SVG path data.
+ */
+export declare function getSvgPathFromStroke(stroke: number[][]): string;
+export declare const defaultOptions: StrokeOptions;
+export declare const getBoundingClientRect: (el: SVGSVGElement | null) => {
+    offsetX: number;
+    offsetY: number;
+};
+export declare const getClinetXY: ({ clientX, clientY }: PointerEvent) => {
+    clientX: number;
+    clientY: number;
+};
+export declare const defaultStyle: React.CSSProperties;
 ```
 
 ### Options

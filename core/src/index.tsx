@@ -2,15 +2,18 @@ import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react
 import { getStroke, type StrokeOptions } from 'perfect-freehand';
 import { getSvgPathFromStroke, getBoundingClientRect, getClinetXY, defaultOptions, defaultStyle } from './utils';
 
+export * from './utils';
+
 export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   prefixCls?: string;
   options?: StrokeOptions;
+  onPointer?: (points: number[][]) => void;
 }
 
 let points: number[][] = [];
 
 const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
-  const { className, prefixCls = 'w-signature', style, options, ...others } = props;
+  const { className, prefixCls = 'w-signature', style, onPointer, options, ...others } = props;
   const cls = [className, prefixCls].filter(Boolean).join(' ');
   const $svg = useRef<SVGSVGElement>(null);
   const $path = useRef<SVGPathElement>();
@@ -40,6 +43,7 @@ const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
   };
 
   const handlePointerUp = () => {
+    onPointer && onPointer(points);
     points = [];
     $path.current = undefined;
   };
