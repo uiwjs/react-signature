@@ -1,0 +1,40 @@
+{
+  "name": "website",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "start": "kkt start",
+    "build": "kkt build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@uiw/react-monorepo-template": "1.1.0",
+    "@uiw/react-markdown-preview-example": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "kkt": "^7.5.4",
+    "markdown-react-code-preview-loader": "^2.1.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

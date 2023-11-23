@@ -1,0 +1,53 @@
+{
+  "name": "@uiw/react-monorepo-template",
+  "version": "1.1.0",
+  "description": "Simple React package development project example template..",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://uiwjs.github.io/react-monorepo-template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uiwjs/react-monorepo-template.git"
+  },
+  "license": "MIT",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "files": [
+    "dist.css",
+    "dist",
+    "cjs",
+    "esm",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react-monorepo-template",
+    "react.js",
+    "react",
+    "template",
+    "monorepo",
+    "monorepo-template",
+    "uiw",
+    "uiw-react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "css",
+    "uikit",
+    "react-ui",
+    "framework"
+  ],
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.18.9",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
