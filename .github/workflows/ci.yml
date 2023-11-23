@@ -39,7 +39,6 @@ jobs:
 
       - run: cp -rp coverage website/build
       - run: cp -rp core/dist/*js website/build
-      - run: cp -rp core/dist/*css website/build
 
       - name: Is a tag created auto?
         id: create_tag
