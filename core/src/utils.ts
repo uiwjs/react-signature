@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef } from 'react';
 import { type StrokeOptions } from 'perfect-freehand';
 
 /**
@@ -44,7 +45,6 @@ export const getBoundingClientRect = (el: SVGSVGElement | null) => {
 };
 
 export const getClinetXY = ({ clientX, clientY }: PointerEvent) => {
-  // const { clientX, clientY } = e.type === 'touchmove' ? (e as TouchEvent).touches[0] : (e as MouseEvent);
   return { clientX, clientY };
 };
 
@@ -56,3 +56,14 @@ export const defaultStyle: React.CSSProperties = {
   height: '100%',
   backgroundColor: 'var(--w-signature-background)',
 } as React.CSSProperties;
+
+// Saves incoming handler to the ref in order to avoid "useCallback hell"
+export function useEvent<K>(handler?: (event: K) => void): (event: K) => void {
+  const callbackRef = useRef(handler);
+
+  useEffect(() => {
+    callbackRef.current = handler;
+  });
+
+  return useCallback((event: K) => callbackRef.current && callbackRef.current(event), []);
+}

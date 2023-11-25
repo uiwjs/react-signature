@@ -3,6 +3,7 @@ react-signature
 
 [![Build & Deploy](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml/badge.svg)](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml)
 [![Coverage Status](https://uiwjs.github.io/react-signature/badges.svg)](https://uiwjs.github.io/react-signature/lcov-report/)
+[![npm version](https://img.shields.io/npm/v/@uiw/react-signature.svg)](https://www.npmjs.com/package/@uiw/react-signature)
 
 A signature board component for react.
 
@@ -81,6 +82,40 @@ export default function App() {
   );
 }
 ```
+
+## Create Points
+
+```jsx mdx:preview
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import Signature from '@uiw/react-signature';
+
+export default function App() {
+  const $svg = useRef(null);
+  const [points, setPoints] = useState([])
+  const handle = (evn) => {
+    const parentElement = $svg.current
+    while (parentElement.firstChild) {
+      parentElement.removeChild(parentElement.firstChild);
+    }
+    setPoints([])
+  }
+  const handlePoints = (data) => {
+    if (data.length > 0) {
+      setPoints([ ...points, JSON.stringify(data) ]);
+    }
+  }
+  return (
+    <>
+      <Signature ref={$svg} onPointer={handlePoints} />
+      <button onClick={handle}>Clear</button>
+      {points.map((item, idx) => {
+        return <pre key={idx} style={{ whiteSpace: 'pre-wrap' }}>{item}</pre>
+      })}
+    </>
+  );
+}
+```
+
 
 ## Props
 

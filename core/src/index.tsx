@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { getStroke, type StrokeOptions } from 'perfect-freehand';
-import { getSvgPathFromStroke, getBoundingClientRect, getClinetXY, defaultOptions, defaultStyle } from './utils';
+import {
+  getSvgPathFromStroke,
+  getBoundingClientRect,
+  getClinetXY,
+  defaultOptions,
+  defaultStyle,
+  useEvent,
+} from './utils';
 
 export * from 'perfect-freehand';
 export * from './utils';
@@ -30,7 +37,7 @@ const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
 
   useImperativeHandle<SVGSVGElement | null, SVGSVGElement | null>(ref, () => $svg.current, [$svg.current]);
 
-  const handlePointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
+  const handlePointerDown = useEvent((e: React.PointerEvent<SVGSVGElement>) => {
     const { offsetY, offsetX } = getBoundingClientRect($svg.current);
     const clientX = e.clientX || e.nativeEvent.clientX;
     const clientY = e.clientY || e.nativeEvent.clientY;
@@ -38,25 +45,27 @@ const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
     const pathElm = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     $path.current = pathElm;
     $svg.current!.appendChild(pathElm);
-  };
+  });
 
-  const handlePointerMove = (e: PointerEvent) => {
+  const handlePointerMove = useEvent((e: PointerEvent) => {
     if ($path.current) {
+      const resultOptions = { ...defaultOptions, ...options };
+      console.log(resultOptions);
       const { offsetY, offsetX } = getBoundingClientRect($svg.current);
       const { clientX, clientY } = getClinetXY(e);
       pointsRef.current = [...pointsRef.current!, [clientX - offsetX, clientY - offsetY]];
-      const stroke = getStroke(pointsRef.current!, { ...defaultOptions, ...options });
+      const stroke = getStroke(pointsRef.current!, resultOptions);
       const pathData = getSvgPathFromStroke(stroke);
       $path.current?.setAttribute('d', pathData);
     }
-  };
+  });
 
-  const handlePointerUp = () => {
+  const handlePointerUp = useEvent(() => {
     let result = pointsRef.current || [];
-    onPointer && onPointer(result);
+    onPointer && props.onPointer!(result);
     $path.current = undefined;
     pointsRef.current = undefined;
-  };
+  });
 
   useEffect(() => {
     if (readonly) return;
