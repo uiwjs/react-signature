@@ -122,9 +122,47 @@ __webpack_require__.d(__webpack_exports__, {
   getStroke: () => (/* reexport */ ae),
   getStrokeOutlinePoints: () => (/* reexport */ ce),
   getStrokePoints: () => (/* reexport */ me),
-  getSvgPathFromStroke: () => (/* reexport */ getSvgPathFromStroke)
+  getSvgPathFromStroke: () => (/* reexport */ getSvgPathFromStroke),
+  useEvent: () => (/* reexport */ useEvent)
 });
 
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
+
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
 ;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/typeof.js
 function _typeof(o) {
   "@babel/helpers - typeof";
@@ -192,43 +230,6 @@ function _objectSpread2(e) {
     });
   }
   return e;
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/iterableToArray.js
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
-
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 ;// CONCATENATED MODULE: ../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -312,12 +313,12 @@ function _slicedToArray(arr, i) {
 ;// CONCATENATED MODULE: ./src/utils.ts
 /**
  * Turn the points returned from perfect-freehand into SVG path data.
- */function getSvgPathFromStroke(stroke){if(!stroke.length)return'';var d=stroke.reduce(function(acc,_ref,i,arr){var _ref2=_slicedToArray(_ref,2),x0=_ref2[0],y0=_ref2[1];var _arr=_slicedToArray(arr[(i+1)%arr.length],2),x1=_arr[0],y1=_arr[1];acc.push(x0,y0,(x0+x1)/2,(y0+y1)/2);return acc;},['M'].concat(_toConsumableArray(stroke[0]),['Q']));d.push('Z');return d.join(' ');}var defaultOptions={size:6,smoothing:0.46,thinning:0.73,streamline:0.5,easing:function easing(t){return t;},start:{taper:0,easing:function easing(t){return t;},cap:true},end:{taper:0,easing:function easing(t){return t;},cap:true}};var getBoundingClientRect=function getBoundingClientRect(el){var rect=el===null||el===void 0?void 0:el.getBoundingClientRect();var offsetX=(rect===null||rect===void 0?void 0:rect.left)||0;var offsetY=(rect===null||rect===void 0?void 0:rect.top)||0;return{offsetX:offsetX,offsetY:offsetY};};var getClinetXY=function getClinetXY(_ref3){var clientX=_ref3.clientX,clientY=_ref3.clientY;// const { clientX, clientY } = e.type === 'touchmove' ? (e as TouchEvent).touches[0] : (e as MouseEvent);
-return{clientX:clientX,clientY:clientY};};var defaultStyle={'--w-signature-background':'#fff',touchAction:'none',position:'relative',width:'100%',height:'100%',backgroundColor:'var(--w-signature-background)'};
+ */function getSvgPathFromStroke(stroke){if(!stroke.length)return'';var d=stroke.reduce(function(acc,_ref,i,arr){var _ref2=_slicedToArray(_ref,2),x0=_ref2[0],y0=_ref2[1];var _arr=_slicedToArray(arr[(i+1)%arr.length],2),x1=_arr[0],y1=_arr[1];acc.push(x0,y0,(x0+x1)/2,(y0+y1)/2);return acc;},['M'].concat(_toConsumableArray(stroke[0]),['Q']));d.push('Z');return d.join(' ');}var defaultOptions={size:6,smoothing:0.46,thinning:0.73,streamline:0.5,easing:function easing(t){return t;},start:{taper:0,easing:function easing(t){return t;},cap:true},end:{taper:0,easing:function easing(t){return t;},cap:true}};var getBoundingClientRect=function getBoundingClientRect(el){var rect=el===null||el===void 0?void 0:el.getBoundingClientRect();var offsetX=(rect===null||rect===void 0?void 0:rect.left)||0;var offsetY=(rect===null||rect===void 0?void 0:rect.top)||0;return{offsetX:offsetX,offsetY:offsetY};};var getClinetXY=function getClinetXY(_ref3){var clientX=_ref3.clientX,clientY=_ref3.clientY;return{clientX:clientX,clientY:clientY};};var defaultStyle={'--w-signature-background':'#fff',touchAction:'none',position:'relative',width:'100%',height:'100%',backgroundColor:'var(--w-signature-background)'};// Saves incoming handler to the ref in order to avoid "useCallback hell"
+function useEvent(handler){var callbackRef=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)(handler);(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useEffect)(function(){callbackRef.current=handler;});return (0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useCallback)(function(event){return callbackRef.current&&callbackRef.current(event);},[]);}
 // EXTERNAL MODULE: ../node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(246);
 ;// CONCATENATED MODULE: ./src/index.tsx
-var _excluded=["className","prefixCls","style","readonly","onPointer","options","children"];var Signature=/*#__PURE__*/(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.forwardRef)(function(props,ref){var className=props.className,_props$prefixCls=props.prefixCls,prefixCls=_props$prefixCls===void 0?'w-signature':_props$prefixCls,style=props.style,_props$readonly=props.readonly,readonly=_props$readonly===void 0?false:_props$readonly,onPointer=props.onPointer,options=props.options,children=props.children,others=_objectWithoutProperties(props,_excluded);var cls=[className,prefixCls].filter(Boolean).join(' ');var $svg=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)(null);var $path=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)();var pointsRef=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)();(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useImperativeHandle)(ref,function(){return $svg.current;},[$svg.current]);var handlePointerDown=function handlePointerDown(e){var _getBoundingClientRec=getBoundingClientRect($svg.current),offsetY=_getBoundingClientRec.offsetY,offsetX=_getBoundingClientRec.offsetX;var clientX=e.clientX||e.nativeEvent.clientX;var clientY=e.clientY||e.nativeEvent.clientY;pointsRef.current=[[clientX-offsetX,clientY-offsetY]];var pathElm=document.createElementNS('http://www.w3.org/2000/svg','path');$path.current=pathElm;$svg.current.appendChild(pathElm);};var handlePointerMove=function handlePointerMove(e){if($path.current){var _$path$current;var _getBoundingClientRec2=getBoundingClientRect($svg.current),offsetY=_getBoundingClientRec2.offsetY,offsetX=_getBoundingClientRec2.offsetX;var _getClinetXY=getClinetXY(e),clientX=_getClinetXY.clientX,clientY=_getClinetXY.clientY;pointsRef.current=[].concat(_toConsumableArray(pointsRef.current),[[clientX-offsetX,clientY-offsetY]]);var stroke=ae(pointsRef.current,_objectSpread2(_objectSpread2({},defaultOptions),options));var pathData=getSvgPathFromStroke(stroke);(_$path$current=$path.current)===null||_$path$current===void 0?void 0:_$path$current.setAttribute('d',pathData);}};var handlePointerUp=function handlePointerUp(){var result=pointsRef.current||[];onPointer&&onPointer(result);$path.current=undefined;pointsRef.current=undefined;};(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useEffect)(function(){if(readonly)return;document.addEventListener('pointermove',handlePointerMove);document.addEventListener('pointerup',handlePointerUp);return function(){if(readonly)return;document.removeEventListener('pointermove',handlePointerMove);document.removeEventListener('pointerup',handlePointerUp);};},[]);return/*#__PURE__*/(0,jsx_runtime.jsx)("svg",_objectSpread2(_objectSpread2({},others),{},{ref:$svg,className:cls,onPointerDown:handlePointerDown,style:_objectSpread2(_objectSpread2({},defaultStyle),style),children:children}));});/* harmony default export */ const src = (Signature);
+var _excluded=["className","prefixCls","style","readonly","onPointer","options","children"];var Signature=/*#__PURE__*/(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.forwardRef)(function(props,ref){var className=props.className,_props$prefixCls=props.prefixCls,prefixCls=_props$prefixCls===void 0?'w-signature':_props$prefixCls,style=props.style,_props$readonly=props.readonly,readonly=_props$readonly===void 0?false:_props$readonly,onPointer=props.onPointer,options=props.options,children=props.children,others=_objectWithoutProperties(props,_excluded);var cls=[className,prefixCls].filter(Boolean).join(' ');var $svg=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)(null);var $path=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)();var pointsRef=(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useRef)();(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useImperativeHandle)(ref,function(){return $svg.current;},[$svg.current]);var handlePointerDown=useEvent(function(e){var _getBoundingClientRec=getBoundingClientRect($svg.current),offsetY=_getBoundingClientRec.offsetY,offsetX=_getBoundingClientRec.offsetX;var clientX=e.clientX||e.nativeEvent.clientX;var clientY=e.clientY||e.nativeEvent.clientY;pointsRef.current=[[clientX-offsetX,clientY-offsetY]];var pathElm=document.createElementNS('http://www.w3.org/2000/svg','path');$path.current=pathElm;$svg.current.appendChild(pathElm);});var handlePointerMove=useEvent(function(e){if($path.current){var _$path$current;var resultOptions=_objectSpread2(_objectSpread2({},defaultOptions),options);console.log(resultOptions);var _getBoundingClientRec2=getBoundingClientRect($svg.current),offsetY=_getBoundingClientRec2.offsetY,offsetX=_getBoundingClientRec2.offsetX;var _getClinetXY=getClinetXY(e),clientX=_getClinetXY.clientX,clientY=_getClinetXY.clientY;pointsRef.current=[].concat(_toConsumableArray(pointsRef.current),[[clientX-offsetX,clientY-offsetY]]);var stroke=ae(pointsRef.current,resultOptions);var pathData=getSvgPathFromStroke(stroke);(_$path$current=$path.current)===null||_$path$current===void 0?void 0:_$path$current.setAttribute('d',pathData);}});var handlePointerUp=useEvent(function(){var result=pointsRef.current||[];onPointer&&props.onPointer(result);$path.current=undefined;pointsRef.current=undefined;});(0,external_root_React_commonjs2_react_commonjs_react_amd_react_.useEffect)(function(){if(readonly)return;document.addEventListener('pointermove',handlePointerMove);document.addEventListener('pointerup',handlePointerUp);return function(){if(readonly)return;document.removeEventListener('pointermove',handlePointerMove);document.removeEventListener('pointerup',handlePointerUp);};},[]);return/*#__PURE__*/(0,jsx_runtime.jsx)("svg",_objectSpread2(_objectSpread2({},others),{},{ref:$svg,className:cls,onPointerDown:handlePointerDown,style:_objectSpread2(_objectSpread2({},defaultStyle),style),children:children}));});/* harmony default export */ const src = (Signature);
 })();
 
 /******/ 	return __webpack_exports__;
