@@ -1,5 +1,4 @@
 import { createContext, useContext } from 'react';
-import { type StrokeOptions } from 'perfect-freehand';
 
 export const initialState: InitialState = {};
 

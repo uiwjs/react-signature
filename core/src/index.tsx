@@ -14,27 +14,33 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   options?: StrokeOptions;
   readonly?: boolean;
   defaultPoints?: Record<string, number[][]>;
+  renderPath?: (d: string, keyName: string, point: number[][]) => JSX.Element;
   onPointer?: (points: number[][]) => void;
 }
 
-const Signature = forwardRef<SVGSVGElement, SignatureProps>(({ children, options, defaultPoints, ...props }, ref) => {
-  const [state, dispatch] = useReducer(reducer, Object.assign({}, defaultPoints));
-  const [stateOption, dispatchOption] = useReducer(reducerOption, Object.assign({ ...defaultOptions }, options));
-  useEffect(() => dispatchOption({ ...options }), [options]);
-  return (
-    <PointerContext.Provider value={state}>
-      <PointerDispatchContext.Provider value={dispatch}>
-        <Container {...props} ref={ref}>
-          <OptionContext.Provider value={stateOption}>
-            <OptionDispatchContext.Provider value={dispatchOption}>
-              <Paths />
-            </OptionDispatchContext.Provider>
-          </OptionContext.Provider>
-          {children}
-        </Container>
-      </PointerDispatchContext.Provider>
-    </PointerContext.Provider>
-  );
-});
+const Signature = forwardRef<SVGSVGElement, SignatureProps>(
+  ({ children, options, renderPath, defaultPoints, ...props }, ref) => {
+    const [state, dispatch] = useReducer(reducer, Object.assign({}, defaultPoints));
+    const [stateOption, dispatchOption] = useReducer(
+      reducerOption,
+      Object.assign({ ...defaultOptions, renderPath }, options),
+    );
+    useEffect(() => dispatchOption({ ...options, renderPath }), [options, renderPath]);
+    return (
+      <PointerContext.Provider value={state}>
+        <PointerDispatchContext.Provider value={dispatch}>
+          <Container {...props} ref={ref}>
+            <OptionContext.Provider value={stateOption}>
+              <OptionDispatchContext.Provider value={dispatchOption}>
+                <Paths />
+              </OptionDispatchContext.Provider>
+            </OptionContext.Provider>
+            {children}
+          </Container>
+        </PointerDispatchContext.Provider>
+      </PointerContext.Provider>
+    );
+  },
+);
 
 export default Signature;

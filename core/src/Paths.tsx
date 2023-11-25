@@ -9,7 +9,7 @@ export const Paths = () => {
   return (
     <Fragment>
       {Object.keys(data).map((key) => (
-        <CreatePath key={key} data={data[key]} />
+        <CreatePath key={key} keyName={key} data={data[key]} />
       ))}
     </Fragment>
   );
@@ -17,12 +17,15 @@ export const Paths = () => {
 
 type CreatePathProps = {
   data: number[][];
+  keyName: string;
 };
 
-const CreatePath = ({ data = [] }: CreatePathProps) => {
-  const options = useOptionStore();
+const CreatePath = ({ data = [], keyName }: CreatePathProps) => {
+  const { renderPath, ...options } = useOptionStore();
   const stroke = getStroke(data, options);
   const pathData = getSvgPathFromStroke(stroke);
+  const dom = renderPath ? renderPath(pathData, keyName, data) : null;
+  if (dom) return dom;
   return (
     <Fragment>
       <path d={pathData} />

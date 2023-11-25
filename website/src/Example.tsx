@@ -154,7 +154,7 @@ export const ExampleSignature = () => {
       <button onClick={resetOption}>Reset Options</button>
       <button onClick={handleCopy}>Copy Options</button>
       <button onClick={handleSVGCopy}>Copy to SVG</button>
-      <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', paddingTop: '1rem' }}>
         <label>
           <div>Size: {options.size}</div>
           <input

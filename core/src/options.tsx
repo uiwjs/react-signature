@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { type StrokeOptions } from 'perfect-freehand';
+import { SignatureProps } from './';
 
 export const defaultOptions: InitialOptionState = {
   size: 6,
@@ -23,7 +24,9 @@ export const OptionContext = createContext<InitialOptionState>(defaultOptions);
 export const OptionDispatchContext = createContext<Dispatch>(() => {});
 
 type Dispatch = React.Dispatch<InitialOptionState>;
-type InitialOptionState = StrokeOptions;
+type InitialOptionState = StrokeOptions & {
+  renderPath?: SignatureProps['renderPath'];
+};
 
 export function reducerOption(tasks: InitialOptionState, action: InitialOptionState) {
   return { ...tasks, ...action };
