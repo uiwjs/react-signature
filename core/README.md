@@ -4,6 +4,7 @@ react-signature
 [![Build & Deploy](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml/badge.svg)](https://github.com/uiwjs/react-signature/actions/workflows/ci.yml)
 [![Coverage Status](https://uiwjs.github.io/react-signature/badges.svg)](https://uiwjs.github.io/react-signature/lcov-report/)
 [![npm version](https://img.shields.io/npm/v/@uiw/react-signature.svg)](https://www.npmjs.com/package/@uiw/react-signature)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-000000?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor)
 
 A signature board component for react.
 
