@@ -1,5 +1,6 @@
-import Signature, { defaultOptions, StrokeOptions, getStroke, getSvgPathFromStroke } from '@uiw/react-signature';
 import { useRef, useState } from 'react';
+import Signature, { defaultOptions, StrokeOptions } from '@uiw/react-signature';
+import copyTextToClipboard from '@uiw/copy-to-clipboard';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -115,6 +116,8 @@ const points2 = [
   [200.15625, 151.0234375],
 ];
 
+const points = { points1, points2 };
+
 export const ExampleSignature = () => {
   const $svg = useRef<SVGSVGElement>(null);
   const [options, setOptions] = useState<StrokeOptions>(defaultOptions);
@@ -126,11 +129,17 @@ export const ExampleSignature = () => {
     }
   };
 
-  const pathData = getSvgPathFromStroke(getStroke(points1, options));
-  const pathData2 = getSvgPathFromStroke(getStroke(points2, options));
-
-  const resetOption = () => {
-    setOptions(defaultOptions);
+  const resetOption = () => setOptions(defaultOptions);
+  const handleCopy = () => copyTextToClipboard(JSON.stringify(options, null, 2));
+  const handleSVGCopy = () => {
+    const svgelm = $svg.current?.cloneNode(true) as SVGSVGElement;
+    const clientWidth = $svg.current?.clientWidth;
+    const clientHeight = $svg.current?.clientHeight;
+    svgelm.removeAttribute('style');
+    svgelm.setAttribute('width', `${clientWidth}px`);
+    svgelm.setAttribute('height', `${clientHeight}px`);
+    svgelm.setAttribute('viewbox', `${clientWidth} ${clientHeight}`);
+    copyTextToClipboard(svgelm.outerHTML);
   };
 
   return (
@@ -139,17 +148,12 @@ export const ExampleSignature = () => {
         style={{ borderRadius: 5, height: 210, border: '1px solid var(--color-border-default, #30363d)' }}
         ref={$svg}
         options={options}
-        onPointer={(points) => {
-          // console.log(JSON.stringify(points));
-        }}
-      >
-        <path d={pathData} />
-        <path d={pathData2} />
-      </Signature>
+        defaultPoints={points}
+      />
       <button onClick={handle}>Clear</button>
       <button onClick={resetOption}>Reset Options</button>
-      <button onClick={handle}>Copy Options</button>
-      <button onClick={handle}>Copy to SVG</button>
+      <button onClick={handleCopy}>Copy Options</button>
+      <button onClick={handleSVGCopy}>Copy to SVG</button>
       <div>
         <label>
           <div>Size: {options.size}</div>

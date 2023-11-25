@@ -19,24 +19,6 @@ export function getSvgPathFromStroke(stroke: number[][]) {
   return d.join(' ');
 }
 
-export const defaultOptions: StrokeOptions = {
-  size: 6,
-  smoothing: 0.46,
-  thinning: 0.73,
-  streamline: 0.5,
-  easing: (t) => t,
-  start: {
-    taper: 0,
-    easing: (t) => t,
-    cap: true,
-  },
-  end: {
-    taper: 0,
-    easing: (t) => t,
-    cap: true,
-  },
-};
-
 export const getBoundingClientRect = (el: SVGSVGElement | null) => {
   const rect = el?.getBoundingClientRect();
   const offsetX = rect?.left || 0;
