@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.88% </span>
+                <span class="strong">47.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/45</span>
+                <span class='fraction'>22/46</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>3/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.65% </span>
+                <span class="strong">52.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/41</span>
+                <span class='fraction'>22/42</span>
             </div>
         
             
@@ -146,7 +146,12 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,8 +182,11 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -230,10 +238,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef, useId, forwardRef, useImperativeHandle } from 'react';
-import { getStroke, type StrokeOptions } from 'perfect-freehand';
+import { type StrokeOptions } from 'perfect-freehand';
 import { getBoundingClientRect, getClinetXY, defaultStyle, useEvent } from './utils';
 &nbsp;
 import { useDispatch } from './store';
+import { SignatureRef } from './';
 &nbsp;
 export interface SignatureProps extends React.SVGProps&lt;SVGSVGElement&gt; {
   prefixCls?: string;
@@ -242,7 +251,7 @@ export interface SignatureProps extends React.SVGProps&lt;SVGSVGElement&gt; {
   onPointer?: (points: number[][]) =&gt; void;
 }
 &nbsp;
-export const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props, ref) =&gt; {
+export const Signature = forwardRef&lt;SignatureRef, SignatureProps&gt;((props, ref) =&gt; {
   const {
     className,
     prefixCls = 'w-signature',
@@ -259,9 +268,12 @@ export const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props,
   const pointsRef = useRef&lt;number[][]&gt;();
   const pointCount = useRef&lt;number&gt;(0);
   const pointId = useId();
-  const distpatch = useDispatch();
-&nbsp;
-  useImperativeHandle&lt;SVGSVGElement | null, SVGSVGElement | null&gt;(ref, <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >$svg.current,</span> [$svg.current]);
+  const dispatch = useDispatch();
+  useImperativeHandle&lt;SignatureRef, SignatureRef&gt;(
+    ref,
+<span class="fstat-no" title="function not covered" >    ()</span> =&gt; (<span class="cstat-no" title="statement not covered" >{ svg: $svg.current, dispatch, clear: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >dispatch({}) </span>})</span>,
+    [$svg.current, dispatch],
+  );
 &nbsp;
   const handlePointerDown = useEvent(<span class="fstat-no" title="function not covered" >(e</span>: React.PointerEvent&lt;SVGSVGElement&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >    if (readonly) <span class="cstat-no" title="statement not covered" >return;</span></span>
@@ -273,7 +285,7 @@ export const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props,
     const pathElm = <span class="cstat-no" title="statement not covered" >document.createElementNS('http://www.w3.org/2000/svg', 'path');</span>
 <span class="cstat-no" title="statement not covered" >    $path.current = pathElm;</span>
 <span class="cstat-no" title="statement not covered" >    $svg.current!.appendChild(pathElm);</span>
-<span class="cstat-no" title="statement not covered" >    distpatch({</span>
+<span class="cstat-no" title="statement not covered" >    dispatch({</span>
       [pointId + pointCount.current]: pointsRef.current,
     });
   });
@@ -283,7 +295,7 @@ export const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props,
       const { offsetY, offsetX } = <span class="cstat-no" title="statement not covered" >getBoundingClientRect($svg.current);</span>
       const { clientX, clientY } = <span class="cstat-no" title="statement not covered" >getClinetXY(e);</span>
 <span class="cstat-no" title="statement not covered" >      pointsRef.current = [...pointsRef.current!, [clientX - offsetX, clientY - offsetY]];</span>
-<span class="cstat-no" title="statement not covered" >      distpatch({</span>
+<span class="cstat-no" title="statement not covered" >      dispatch({</span>
         [pointId + pointCount.current]: pointsRef.current,
       });
     }
@@ -319,7 +331,7 @@ export const Signature = forwardRef&lt;SVGSVGElement, SignatureProps&gt;((props,
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-27T05:06:50.540Z
+                at 2023-11-27T09:06:28.768Z
             </div>
         <script src="prettify.js"></script>
         <script>
