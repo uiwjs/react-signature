@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useId, forwardRef, useImperativeHandle } from 'react';
-import { getStroke, type StrokeOptions } from 'perfect-freehand';
+import { type StrokeOptions } from 'perfect-freehand';
 import { getBoundingClientRect, getClinetXY, defaultStyle, useEvent } from './utils';
 
 import { useDispatch } from './store';
+import { SignatureRef } from './';
 
 export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   prefixCls?: string;
@@ -11,7 +12,7 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   onPointer?: (points: number[][]) => void;
 }
 
-export const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) => {
+export const Signature = forwardRef<SignatureRef, SignatureProps>((props, ref) => {
   const {
     className,
     prefixCls = 'w-signature',
@@ -28,9 +29,12 @@ export const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) 
   const pointsRef = useRef<number[][]>();
   const pointCount = useRef<number>(0);
   const pointId = useId();
-  const distpatch = useDispatch();
-
-  useImperativeHandle<SVGSVGElement | null, SVGSVGElement | null>(ref, () => $svg.current, [$svg.current]);
+  const dispatch = useDispatch();
+  useImperativeHandle<SignatureRef, SignatureRef>(
+    ref,
+    () => ({ svg: $svg.current, dispatch, clear: () => dispatch({}) }),
+    [$svg.current, dispatch],
+  );
 
   const handlePointerDown = useEvent((e: React.PointerEvent<SVGSVGElement>) => {
     if (readonly) return;
@@ -42,7 +46,7 @@ export const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) 
     const pathElm = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     $path.current = pathElm;
     $svg.current!.appendChild(pathElm);
-    distpatch({
+    dispatch({
       [pointId + pointCount.current]: pointsRef.current,
     });
   });
@@ -52,7 +56,7 @@ export const Signature = forwardRef<SVGSVGElement, SignatureProps>((props, ref) 
       const { offsetY, offsetX } = getBoundingClientRect($svg.current);
       const { clientX, clientY } = getClinetXY(e);
       pointsRef.current = [...pointsRef.current!, [clientX - offsetX, clientY - offsetY]];
-      distpatch({
+      dispatch({
         [pointId + pointCount.current]: pointsRef.current,
       });
     }

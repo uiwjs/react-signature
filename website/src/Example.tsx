@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Signature, { defaultOptions, StrokeOptions } from '@uiw/react-signature';
+import Signature, { defaultOptions, type StrokeOptions, type SignatureRef } from '@uiw/react-signature';
 import copyTextToClipboard from '@uiw/copy-to-clipboard';
 import styled from 'styled-components';
 
@@ -101,6 +101,7 @@ const points1 = [
   [422.6171875, 174.94921875],
   [423.01953125, 175.1484375],
 ];
+
 const points2 = [
   [277.48828125, 62.6015625],
   [277.4453125, 62.64453125],
@@ -119,22 +120,18 @@ const points2 = [
 const points = { points1, points2 };
 
 export const ExampleSignature = () => {
-  const $svg = useRef<SVGSVGElement>(null);
+  const $svg = useRef<SignatureRef>(null);
   const [options, setOptions] = useState<StrokeOptions>(defaultOptions);
-
   const handle = (evn: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const parentElement = $svg.current as SVGSVGElement;
-    while (parentElement.firstChild) {
-      parentElement.removeChild(parentElement.firstChild);
-    }
+    $svg.current?.clear();
   };
 
   const resetOption = () => setOptions(defaultOptions);
   const handleCopy = () => copyTextToClipboard(JSON.stringify(options, null, 2));
   const handleSVGCopy = () => {
-    const svgelm = $svg.current?.cloneNode(true) as SVGSVGElement;
-    const clientWidth = $svg.current?.clientWidth;
-    const clientHeight = $svg.current?.clientHeight;
+    const svgelm = $svg.current?.svg?.cloneNode(true) as SVGSVGElement;
+    const clientWidth = $svg.current?.svg?.clientWidth;
+    const clientHeight = $svg.current?.svg?.clientHeight;
     svgelm.removeAttribute('style');
     svgelm.setAttribute('width', `${clientWidth}px`);
     svgelm.setAttribute('height', `${clientHeight}px`);
@@ -150,10 +147,12 @@ export const ExampleSignature = () => {
         options={options}
         defaultPoints={points}
       />
-      <button onClick={handle}>Clear</button>
-      <button onClick={resetOption}>Reset Options</button>
-      <button onClick={handleCopy}>Copy Options</button>
-      <button onClick={handleSVGCopy}>Copy to SVG</button>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', paddingTop: '0.46rem' }}>
+        <button onClick={handle}>Clear</button>
+        <button onClick={resetOption}>Reset Options</button>
+        <button onClick={handleCopy}>Copy Options</button>
+        <button onClick={handleSVGCopy}>Copy to SVG</button>
+      </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', paddingTop: '1rem' }}>
         <label>
           <div>Size: {options.size}</div>

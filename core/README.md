@@ -22,12 +22,7 @@ import Signature from '@uiw/react-signature';
 
 export default function App() {
   const $svg = useRef(null);
-  const handle = (evn) => {
-    const parentElement = $svg.current
-    while (parentElement.firstChild) {
-      parentElement.removeChild(parentElement.firstChild);
-    }
-  }
+  const handle = (evn) => $svg.current?.clear();
   return (
     <>
       <Signature ref={$svg} />
@@ -65,16 +60,11 @@ import Signature from '@uiw/react-signature';
 
 export default function App() {
   const $svg = useRef(null);
-  const handle = (evn) => {
-    const parentElement = $svg.current
-    while (parentElement.firstChild) {
-      parentElement.removeChild(parentElement.firstChild);
-    }
-  }
+  const handle = (evn) => $svg.current?.clear();
   return (
     <>
       <Signature ref={$svg} fill="red" style={{ "--w-signature-background": "#e4e6ef" }} />
-      <button onClick={() => handle()}>Clear</button>
+      <button onClick={handle}>Clear</button>
     </>
   );
 }
@@ -90,10 +80,7 @@ export default function App() {
   const $svg = useRef(null);
   const [points, setPoints] = useState([])
   const handle = (evn) => {
-    const parentElement = $svg.current
-    while (parentElement.firstChild) {
-      parentElement.removeChild(parentElement.firstChild);
-    }
+    $svg.current?.clear();
     setPoints([])
   }
   const handlePoints = (data) => {
@@ -146,6 +133,7 @@ export default function App() {
 ```ts
 import React from 'react';
 import { type StrokeOptions } from 'perfect-freehand';
+import { type Dispatch } from '@uiw/react-signature';
 export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   prefixCls?: string;
   options?: StrokeOptions;
@@ -153,6 +141,11 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   defaultPoints?: Record<string, number[][]>;
   onPointer?: (points: number[][]) => void;
 }
+export type SignatureRef = {
+  svg: SVGSVGElement | null;
+  dispatch: Dispatch;
+  clear: () => void;
+};
 export default function Signature(props?: SignatureProps): React.JSX.Element;
 ```
 

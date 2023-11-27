@@ -2,11 +2,8 @@
   "private": true,
   "scripts": {
     "⬇️⬇️⬇️⬇️⬇️ package ⬇️⬇️⬇️⬇️⬇️": "▼▼▼▼▼ package ▼▼▼▼▼",
-    "build": "lerna exec --scope @uiw/* -- tsbb build src/*.tsx --use-babel --cjs cjs --bail && npm run css:build && npm run css:build:dist",
-    "watch": "lerna exec \"tsbb watch src/*.tsx --use-babel --cjs cjs\" --scope @uiw/* & npm run css:watch",
-    "css:build": "lerna exec --scope @uiw/* -- compile-less -d src -o esm",
-    "css:watch": "lerna exec --scope @uiw/* -- compile-less -d src -o esm --watch",
-    "css:build:dist": "lerna exec --scope @uiw/* -- compile-less -d src -o lib --combine=dist.css",
+    "build": "lerna exec --scope @uiw/* -- tsbb build src/*.tsx --use-babel --cjs cjs --bail",
+    "watch": "lerna exec \"tsbb watch src/*.tsx --use-babel --cjs cjs\" --scope @uiw/*",
     "bundle": "lerna exec --scope @uiw/* -- ncc build src/index.tsx --target web --filename dist",
     "bundle:min": "lerna exec --scope @uiw/* -- ncc build src/index.tsx --target web --filename dist --minify",
     "⬆️⬆️⬆️⬆️⬆️ package ⬆️⬆️⬆️⬆️⬆️": "▲▲▲▲▲ package ▲▲▲▲▲",

@@ -1,6 +1,6 @@
 import React, { useReducer, forwardRef, useEffect } from 'react';
 import { type StrokeOptions } from 'perfect-freehand';
-import { PointerContext, PointerDispatchContext, reducer } from './store';
+import { PointerContext, PointerDispatchContext, reducer, type Dispatch } from './store';
 import { OptionContext, OptionDispatchContext, reducerOption, defaultOptions } from './options';
 import { Signature as Container } from './Signature';
 import { Paths } from './Paths';
@@ -8,6 +8,13 @@ import { Paths } from './Paths';
 export * from 'perfect-freehand';
 export * from './utils';
 export * from './options';
+export * from './store';
+
+export type SignatureRef = {
+  svg: SVGSVGElement | null;
+  dispatch: Dispatch;
+  clear: () => void;
+};
 
 export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   prefixCls?: string;
@@ -18,7 +25,7 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   onPointer?: (points: number[][]) => void;
 }
 
-const Signature = forwardRef<SVGSVGElement, SignatureProps>(
+const Signature = forwardRef<SignatureRef, SignatureProps>(
   ({ children, options, renderPath, defaultPoints, ...props }, ref) => {
     const [state, dispatch] = useReducer(reducer, Object.assign({}, defaultPoints));
     const [stateOption, dispatchOption] = useReducer(
