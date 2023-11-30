@@ -8,8 +8,8 @@ export const Paths = () => {
   const { options, ...data } = useStore();
   return (
     <Fragment>
-      {Object.keys(data).map((key) => (
-        <CreatePath key={key} keyName={key} data={data[key]} />
+      {Object.keys(data).map((key, index) => (
+        <CreatePath key={key} keyName={key} index={index} data={data[key]} />
       ))}
     </Fragment>
   );
@@ -18,17 +18,14 @@ export const Paths = () => {
 type CreatePathProps = {
   data: number[][];
   keyName: string;
+  index: number;
 };
 
-const CreatePath = ({ data = [], keyName }: CreatePathProps) => {
+const CreatePath = ({ data = [], index, keyName }: CreatePathProps) => {
   const { renderPath, ...options } = useOptionStore();
   const stroke = getStroke(data, options);
   const pathData = getSvgPathFromStroke(stroke);
-  const dom = renderPath ? renderPath(pathData, keyName, data) : null;
+  const dom = renderPath ? renderPath(pathData, keyName, data, index) : null;
   if (dom) return dom;
-  return (
-    <Fragment>
-      <path d={pathData} />
-    </Fragment>
-  );
+  return <path d={pathData} />;
 };

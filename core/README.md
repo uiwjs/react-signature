@@ -103,7 +103,7 @@ export default function App() {
 ## Render Path
 
 ```jsx mdx:preview
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Signature from '@uiw/react-signature';
 
 const points = {
@@ -112,18 +112,24 @@ const points = {
 }
 
 export default function App() {
+  const $svg = useRef(null);
+  const handle = (evn) => $svg.current?.clear();
   return (
-    <Signature
-      defaultPoints={points}
-      renderPath={(path, keyName) => {
-        if (keyName === 'path-1') {
-          return <path d={path} fill="red" />
-        }
-        if (keyName === 'path-2') {
-          return <path d={path} fill="blue" />
-        }
-      }}
-    />
+    <>
+      <Signature
+        ref={$svg}
+        defaultPoints={points}
+        renderPath={(path, keyName, data, index) => {
+          if (keyName === 'path-1' || index === 0) {
+            return <path d={path} fill="red" />
+          }
+          if (keyName === 'path-2' || index === 1) {
+            return <path d={path} fill="blue" />
+          }
+        }}
+      />
+      <button onClick={handle}>Clear</button>
+    </>
   );
 }
 ```
@@ -131,7 +137,7 @@ export default function App() {
 ## Stroke
 
 ```jsx mdx:preview
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Signature from '@uiw/react-signature';
 
 const points = {
@@ -140,37 +146,43 @@ const points = {
 }
 
 export default function App() {
+  const $svg = useRef(null);
+  const handle = (evn) => $svg.current?.clear();
   return (
-    <Signature
-      defaultPoints={points}
-      options={{
-        size: 6,
-      }}
-      renderPath={(path, keyName) => {
-          return (
-            <>
-              <path
-                d={path}
-                strokeWidth="3"
-                stroke="blue"
-                fill="transparent"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                pointerEvents="all"
-              />
-              <path
-                d={path}
-                strokeWidth="0"
-                stroke="transparent"
-                fill="#dadada"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                pointerEvents="all"
-              />
-            </>
-          )
-      }}
-    />
+    <>
+      <Signature
+        ref={$svg}
+        defaultPoints={points}
+        options={{
+          size: 6,
+        }}
+        renderPath={(path, keyName) => {
+            return (
+              <>
+                <path
+                  d={path}
+                  strokeWidth="3"
+                  stroke="blue"
+                  fill="transparent"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  pointerEvents="all"
+                />
+                <path
+                  d={path}
+                  strokeWidth="0"
+                  stroke="transparent"
+                  fill="#dadada"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  pointerEvents="all"
+                />
+              </>
+            )
+        }}
+      />
+      <button onClick={handle}>Clear</button>
+    </>
   );
 }
 ```
