@@ -139,6 +139,30 @@ export const ExampleSignature = () => {
     copyTextToClipboard(svgelm.outerHTML);
   };
 
+  const downloadImage = () => {
+    const svgelm = $svg.current?.svg?.cloneNode(true) as SVGSVGElement;
+    const clientWidth = $svg.current?.svg?.clientWidth;
+    const clientHeight = $svg.current?.svg?.clientHeight;
+    svgelm.removeAttribute('style');
+    svgelm.setAttribute('width', `${clientWidth}px`);
+    svgelm.setAttribute('height', `${clientHeight}px`);
+    svgelm.setAttribute('viewbox', `${clientWidth} ${clientHeight}`);
+    const data = new XMLSerializer().serializeToString(svgelm);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = clientWidth || 0;
+      canvas.height = clientHeight || 0;
+      ctx?.drawImage(img, 0, 0);
+      const a = document.createElement('a');
+      a.download = 'signature.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    };
+    img.src = `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(data)))}`;
+  };
+
   return (
     <Wrapper>
       <Signature
@@ -147,11 +171,12 @@ export const ExampleSignature = () => {
         options={options}
         defaultPoints={points}
       />
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', paddingTop: '0.46rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.51rem', paddingTop: '0.46rem' }}>
         <button onClick={handle}>Clear</button>
         <button onClick={resetOption}>Reset Options</button>
         <button onClick={handleCopy}>Copy Options</button>
         <button onClick={handleSVGCopy}>Copy to SVG</button>
+        <button onClick={downloadImage}>Download Image</button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', paddingTop: '1rem' }}>
         <label>
