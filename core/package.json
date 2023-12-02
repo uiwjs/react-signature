@@ -12,9 +12,24 @@
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
+  "exports": {
+    "./README.md": "./README.md",
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./esm/index.js",
+      "types": "./cjs/index.d.ts",
+      "require": "./cjs/index.js"
+    },
+    "./canvas": {
+      "import": "./esm/canvas/index.js",
+      "types": "./cjs/canvas/index.d.ts",
+      "require": "./cjs/canvas/index.js"
+    }
+  },
   "files": [
     "dist.css",
     "dist",
+    "canvas.d.ts",
     "cjs",
     "esm",
     "src"
