@@ -5,7 +5,7 @@ import { useOptionStore } from './options';
 import { getSvgPathFromStroke } from './utils';
 
 export const Paths = () => {
-  const { options, ...data } = useStore();
+  const data = useStore();
   return (
     <Fragment>
       {Object.keys(data).map((key, index) => (
@@ -22,10 +22,10 @@ type CreatePathProps = {
 };
 
 const CreatePath = ({ data = [], index, keyName }: CreatePathProps) => {
-  const { renderPath, ...options } = useOptionStore();
+  const { renderPath, container, ...options } = useOptionStore();
   const stroke = getStroke(data, options);
   const pathData = getSvgPathFromStroke(stroke);
-  const dom = renderPath ? renderPath(pathData, keyName, data, index) : null;
+  const dom = renderPath ? renderPath(pathData, keyName, data, index, container as unknown as SVGSVGElement) : null;
   if (dom) return dom;
   return <path d={pathData} />;
 };

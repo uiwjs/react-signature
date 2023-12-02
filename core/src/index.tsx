@@ -21,7 +21,7 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   options?: StrokeOptions;
   readonly?: boolean;
   defaultPoints?: Record<string, number[][]>;
-  renderPath?: (d: string, keyName: string, point: number[][], index: number) => JSX.Element;
+  renderPath?: (d: string, keyName: string, point: number[][], index: number, container: SVGSVGElement) => JSX.Element;
   onPointer?: (points: number[][]) => void;
 }
 

@@ -119,7 +119,7 @@ export default function App() {
       <Signature
         ref={$svg}
         defaultPoints={points}
-        renderPath={(path, keyName, data, index) => {
+        renderPath={(path, keyName, data, index, container) => {
           if (keyName === 'path-1' || index === 0) {
             return <path d={path} fill="red" />
           }
@@ -198,7 +198,7 @@ export interface SignatureProps extends React.SVGProps<SVGSVGElement> {
   options?: StrokeOptions;
   readonly?: boolean;
   defaultPoints?: Record<string, number[][]>;
-  renderPath?: (d: string, keyName: string, point: number[][], index: number) => JSX.Element;
+  renderPath?: (d: string, keyName: string, point: number[][], index: number, container: SVGSVGElement) => JSX.Element;
   onPointer?: (points: number[][]) => void;
 }
 export type SignatureRef = {

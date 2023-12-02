@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { type StrokeOptions } from 'perfect-freehand';
 
 /**
  * Turn the points returned from perfect-freehand into SVG path data.
@@ -19,7 +18,7 @@ export function getSvgPathFromStroke(stroke: number[][]) {
   return d.join(' ');
 }
 
-export const getBoundingClientRect = (el: SVGSVGElement | null) => {
+export const getBoundingClientRect = <T extends Element>(el: T | null) => {
   const rect = el?.getBoundingClientRect();
   const offsetX = rect?.left || 0;
   const offsetY = rect?.top || 0;

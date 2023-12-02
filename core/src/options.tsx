@@ -26,6 +26,7 @@ export const OptionDispatchContext = createContext<Dispatch>(() => {});
 type Dispatch = React.Dispatch<InitialOptionState>;
 type InitialOptionState = StrokeOptions & {
   renderPath?: SignatureProps['renderPath'];
+  container?: HTMLElement;
 };
 
 export function reducerOption(tasks: InitialOptionState, action: InitialOptionState) {
