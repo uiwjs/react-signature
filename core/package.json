@@ -1,6 +1,6 @@
 {
   "name": "@uiw/react-signature",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "A signature board component for react.",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://uiwjs.github.io/react-signature",
