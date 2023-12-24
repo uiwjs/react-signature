@@ -18,6 +18,14 @@ root.render(
     description={pkg.description}
     version={`v${VERSION}`}
   >
+    <MarkdownPreviewExample.NavMenu
+      title="React Signature"
+      menus={[
+        <a target="_blank" href="https://jaywcjlove.github.io/#/sponsor" rel="noopener noreferrer">
+          Sponsor
+        </a>,
+      ]}
+    />
     <Github href="https://github.com/uiwjs/react-signature" />
     <Example>
       <ExampleSignature />
