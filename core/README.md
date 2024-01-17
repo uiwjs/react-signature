@@ -62,7 +62,7 @@ export default function App() {
 ## Readonly
 
 ```jsx mdx:preview
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Signature from '@uiw/react-signature';
 
 const points = {
@@ -71,8 +71,12 @@ const points = {
 }
 
 export default function App() {
+  const [readonly, setReadonly] = useState(true)
   return (
-    <Signature defaultPoints={points} readonly fill="#6b85e4" />
+    <>
+      <Signature defaultPoints={points} readonly={readonly} fill="#6b85e4" />
+      <button onClick={() => setReadonly(!readonly)}>readonly={readonly.toString()}</button>
+    </>
   );
 }
 ```

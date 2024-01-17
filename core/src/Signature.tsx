@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useId, forwardRef, useImperativeHandle } from 'react';
 import { getBoundingClientRect, getClinetXY, defaultStyle, useEvent } from './utils';
-
 import { useDispatch } from './store';
 import { SignatureRef, SignatureProps } from './';
 
@@ -20,12 +19,13 @@ export const Signature = forwardRef<SignatureRef, Omit<SignatureProps, 'defaultP
       [$svg.current, dispatch],
     );
 
-    const handlePointerDown = useEvent((e: React.PointerEvent<SVGSVGElement>) => {
+    const handlePointerDown = useEvent<PointerEvent>((e) => {
       if (readonly) return;
       pointCount.current += 1;
       const { offsetY, offsetX } = getBoundingClientRect($svg.current);
-      const clientX = e.clientX || e.nativeEvent.clientX;
-      const clientY = e.clientY || e.nativeEvent.clientY;
+      const evn = e as unknown as React.PointerEvent<SVGSVGElement>;
+      const clientX = evn.clientX || evn.nativeEvent.clientX;
+      const clientY = evn.clientY || evn.nativeEvent.clientY;
       pointsRef.current = [[clientX - offsetX, clientY - offsetY]];
       const pathElm = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       $path.current = pathElm;
@@ -33,6 +33,7 @@ export const Signature = forwardRef<SignatureRef, Omit<SignatureProps, 'defaultP
       dispatch({
         [pointId + pointCount.current]: pointsRef.current,
       });
+      document.addEventListener('pointermove', handlePointerMove);
     });
 
     const handlePointerMove = useEvent((e: PointerEvent) => {
@@ -51,26 +52,22 @@ export const Signature = forwardRef<SignatureRef, Omit<SignatureProps, 'defaultP
       onPointer && props.onPointer!(result);
       $path.current = undefined;
       pointsRef.current = undefined;
+      document.removeEventListener('pointermove', handlePointerMove);
     });
 
     useEffect(() => {
-      if (readonly) return;
-      document.addEventListener('pointermove', handlePointerMove);
       document.addEventListener('pointerup', handlePointerUp);
+      $svg.current?.addEventListener('pointerdown', handlePointerDown);
       return () => {
-        if (readonly) return;
-        document.removeEventListener('pointermove', handlePointerMove);
         document.removeEventListener('pointerup', handlePointerUp);
+        $svg.current?.removeEventListener('pointerdown', handlePointerDown);
       };
     }, []);
+
+    const svgStyle: React.CSSProperties = { ...defaultStyle, ...style };
+
     return (
-      <svg
-        {...others}
-        ref={$svg}
-        className={cls}
-        onPointerDown={handlePointerDown}
-        style={{ ...defaultStyle, ...style }}
-      >
+      <svg {...others} ref={$svg} className={cls} style={svgStyle}>
         {children}
       </svg>
     );
