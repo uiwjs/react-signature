@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.82% </span>
+                <span class="strong">45.65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/46</span>
+                <span class='fraction'>21/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.22% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/18</span>
+                <span class='fraction'>2/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">47.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/42</span>
+                <span class='fraction'>21/44</span>
             </div>
         
             
@@ -138,11 +138,7 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,6 +170,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,33 +195,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,7 +215,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef, useId, forwardRef, useImperativeHandle } from 'react';
 import { getBoundingClientRect, getClinetXY, defaultStyle, useEvent } from './utils';
-&nbsp;
 import { useDispatch } from './store';
 import { SignatureRef, SignatureProps } from './';
 &nbsp;
@@ -241,12 +234,13 @@ export const Signature = forwardRef&lt;SignatureRef, Omit&lt;SignatureProps, 'de
       [$svg.current, dispatch],
     );
 &nbsp;
-    const handlePointerDown = useEvent(<span class="fstat-no" title="function not covered" >(e</span>: React.PointerEvent&lt;SVGSVGElement&gt;) =&gt; {
+    const handlePointerDown = useEvent&lt;PointerEvent&gt;(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (readonly) <span class="cstat-no" title="statement not covered" >return;</span></span>
 <span class="cstat-no" title="statement not covered" >      pointCount.current += 1;</span>
       const { offsetY, offsetX } = <span class="cstat-no" title="statement not covered" >getBoundingClientRect($svg.current);</span>
-      const clientX = <span class="cstat-no" title="statement not covered" >e.clientX || e.nativeEvent.clientX;</span>
-      const clientY = <span class="cstat-no" title="statement not covered" >e.clientY || e.nativeEvent.clientY;</span>
+      const evn = <span class="cstat-no" title="statement not covered" >e as unknown as React.PointerEvent&lt;SVGSVGElement&gt;;</span>
+      const clientX = <span class="cstat-no" title="statement not covered" >evn.clientX || evn.nativeEvent.clientX;</span>
+      const clientY = <span class="cstat-no" title="statement not covered" >evn.clientY || evn.nativeEvent.clientY;</span>
 <span class="cstat-no" title="statement not covered" >      pointsRef.current = [[clientX - offsetX, clientY - offsetY]];</span>
       const pathElm = <span class="cstat-no" title="statement not covered" >document.createElementNS('http://www.w3.org/2000/svg', 'path');</span>
 <span class="cstat-no" title="statement not covered" >      $path.current = pathElm;</span>
@@ -254,6 +248,7 @@ export const Signature = forwardRef&lt;SignatureRef, Omit&lt;SignatureProps, 'de
 <span class="cstat-no" title="statement not covered" >      dispatch({</span>
         [pointId + pointCount.current]: pointsRef.current,
       });
+<span class="cstat-no" title="statement not covered" >      document.addEventListener('pointermove', handlePointerMove);</span>
     });
 &nbsp;
     const handlePointerMove = useEvent(<span class="fstat-no" title="function not covered" >(e</span>: PointerEvent) =&gt; {
@@ -272,26 +267,22 @@ export const Signature = forwardRef&lt;SignatureRef, Omit&lt;SignatureProps, 'de
 <span class="cstat-no" title="statement not covered" >      onPointer &amp;&amp; props.onPointer!(result);</span>
 <span class="cstat-no" title="statement not covered" >      $path.current = undefined;</span>
 <span class="cstat-no" title="statement not covered" >      pointsRef.current = undefined;</span>
+<span class="cstat-no" title="statement not covered" >      document.removeEventListener('pointermove', handlePointerMove);</span>
     });
 &nbsp;
     useEffect(() =&gt; {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (readonly) <span class="cstat-no" title="statement not covered" >return;</span>
-      document.addEventListener('pointermove', handlePointerMove);
       document.addEventListener('pointerup', handlePointerUp);
+      $svg.current?.addEventListener('pointerdown', handlePointerDown);
       return () =&gt; {
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (readonly) <span class="cstat-no" title="statement not covered" >return;</span>
-        document.removeEventListener('pointermove', handlePointerMove);
         document.removeEventListener('pointerup', handlePointerUp);
+        $svg.current?.removeEventListener('pointerdown', handlePointerDown);
       };
     }, []);
+&nbsp;
+    const svgStyle: React.CSSProperties = { ...defaultStyle, ...style };
+&nbsp;
     return (
-      &lt;svg
-        {...others}
-        ref={$svg}
-        className={cls}
-        onPointerDown={handlePointerDown}
-        style={{ ...defaultStyle, ...style }}
-      &gt;
+      &lt;svg {...others} ref={$svg} className={cls} style={svgStyle}&gt;
         {children}
       &lt;/svg&gt;
     );
@@ -304,7 +295,7 @@ export const Signature = forwardRef&lt;SignatureRef, Omit&lt;SignatureProps, 'de
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-24T17:37:39.790Z
+                at 2024-01-17T17:04:23.746Z
             </div>
         <script src="../prettify.js"></script>
         <script>
