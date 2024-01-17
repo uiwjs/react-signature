@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">57.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>11/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">30% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>3/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55.55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>10/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,29 +99,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect } from 'react';
 import { getStroke } from 'perfect-freehand';
@@ -129,18 +129,18 @@ import { useStore } from '../store';
 import { useOptionStore } from '../options';
 import { getSvgPathFromStroke } from '../utils';
 &nbsp;
-export const Paths = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-  const data = <span class="cstat-no" title="statement not covered" >useStore();</span>
-  const { container, ...option } = <span class="cstat-no" title="statement not covered" >useOptionStore();</span>
+export const Paths = () =&gt; {
+  const data = useStore();
+  const { container, ...option } = useOptionStore();
 &nbsp;
-  const canvas = <span class="cstat-no" title="statement not covered" >container as unknown as HTMLCanvasElement;</span>
-  const ctx = <span class="cstat-no" title="statement not covered" >canvas?.getContext('2d');</span>
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (!canvas) <span class="cstat-no" title="statement not covered" >return;</span></span>
-<span class="cstat-no" title="statement not covered" >    if (ctx) {</span>
+  const canvas = container as unknown as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+  useEffect(() =&gt; {
+    if (!canvas) return;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (ctx) {
 <span class="cstat-no" title="statement not covered" >      ctx?.clearRect(0, 0, canvas.width || 0, canvas.height || 0);</span>
     }
-<span class="cstat-no" title="statement not covered" >    Object.keys(data).forEach(<span class="fstat-no" title="function not covered" >(k</span>ey, index) =&gt; {</span>
+    Object.keys(data).forEach(<span class="fstat-no" title="function not covered" >(k</span>ey, index) =&gt; {
       const stroke = <span class="cstat-no" title="statement not covered" >getStroke(data[key], option);</span>
       const pathData = <span class="cstat-no" title="statement not covered" >getSvgPathFromStroke(stroke);</span>
 <span class="cstat-no" title="statement not covered" >      if (ctx) {</span>
@@ -151,7 +151,7 @@ export const Paths = <span class="cstat-no" title="statement not covered" ><span
       }
     });
   }, [data, canvas, option]);
-<span class="cstat-no" title="statement not covered" >  return null;</span>
+  return null;
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -160,7 +160,7 @@ export const Paths = <span class="cstat-no" title="statement not covered" ><span
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-17T17:09:56.195Z
+                at 2024-01-17T18:41:47.451Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

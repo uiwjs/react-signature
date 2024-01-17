@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.36% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,11 +101,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,12 +118,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Fragment } from 'react';
 import { getStroke } from 'perfect-freehand';
@@ -135,8 +135,8 @@ export const Paths = () =&gt; {
   const data = useStore();
   return (
     &lt;Fragment&gt;
-      {Object.keys(data).map(<span class="fstat-no" title="function not covered" >(k</span>ey, index) =&gt; (
-<span class="cstat-no" title="statement not covered" >        &lt;CreatePath key={key} keyName={key} index={index} data={data[key]} /&gt;</span>
+      {Object.keys(data).map((key, index) =&gt; (
+        &lt;CreatePath key={key} keyName={key} index={index} data={data[key]} /&gt;
       ))}
     &lt;/Fragment&gt;
   );
@@ -148,13 +148,13 @@ type CreatePathProps = {
   index: number;
 };
 &nbsp;
-const CreatePath = <span class="fstat-no" title="function not covered" >({</span> data = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span> index, keyName }: CreatePathProps) =&gt; {
-  const { renderPath, container, ...options } = <span class="cstat-no" title="statement not covered" >useOptionStore();</span>
-  const stroke = <span class="cstat-no" title="statement not covered" >getStroke(data, options);</span>
-  const pathData = <span class="cstat-no" title="statement not covered" >getSvgPathFromStroke(stroke);</span>
-  const dom = <span class="cstat-no" title="statement not covered" >renderPath ? renderPath(pathData, keyName, data, index, container as unknown as SVGSVGElement) : null;</span>
-<span class="cstat-no" title="statement not covered" >  if (dom) <span class="cstat-no" title="statement not covered" >return dom;</span></span>
-<span class="cstat-no" title="statement not covered" >  return &lt;path d={pathData} /&gt;;</span>
+const CreatePath = ({ data = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span> index, keyName }: CreatePathProps) =&gt; {
+  const { renderPath, container, ...options } = useOptionStore();
+  const stroke = getStroke(data, options);
+  const pathData = getSvgPathFromStroke(stroke);
+  const dom = renderPath ? <span class="branch-0 cbranch-no" title="branch not covered" >renderPath(pathData, keyName, data, index, container as unknown as SVGSVGElement) </span>: null;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (dom) <span class="cstat-no" title="statement not covered" >return dom;</span>
+  return &lt;path d={pathData} /&gt;;
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -163,7 +163,7 @@ const CreatePath = <span class="fstat-no" title="function not covered" >({</span
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-17T17:09:56.195Z
+                at 2024-01-17T18:41:47.451Z
             </div>
         <script src="../prettify.js"></script>
         <script>
