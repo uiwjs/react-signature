@@ -48,7 +48,7 @@
     "@kkt/ncc": "^1.1.1",
     "@types/react-test-renderer": "^18.0.0",
     "compile-less-cli": "^1.8.13",
-    "husky": "^8.0.1",
+    "husky": "^9.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.1",
