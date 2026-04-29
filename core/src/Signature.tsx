@@ -48,6 +48,7 @@ export const Signature = forwardRef<SignatureRef, Omit<SignatureProps, 'defaultP
     });
 
     const handlePointerUp = useEvent(() => {
+      if (!pointsRef.current) return;
       let result = pointsRef.current || [];
       onPointer && props.onPointer!(result);
       // Remove the temporary path element from DOM
