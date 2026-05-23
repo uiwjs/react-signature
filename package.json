@@ -46,7 +46,7 @@
   "devDependencies": {
     "@kkt/less-modules": "^7.5.4",
     "@kkt/ncc": "^1.1.1",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/react-test-renderer": "^19.0.0",
     "compile-less-cli": "^1.8.13",
     "husky": "^8.0.1",
     "lerna": "^8.0.0",
